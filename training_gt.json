@@ -1,0 +1,1502 @@
+{
+    "0000.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0001.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0002.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0003.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0004.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0005.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0006.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0007.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0008.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0009.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0010.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0011.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0012.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0013.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0014.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0015.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0016.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0017.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0018.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0019.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0020.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0021.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0022.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0023.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0024.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0025.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0026.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0027.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0028.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0029.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0030.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0031.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0032.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0033.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0034.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0035.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0036.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0037.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0038.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0039.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0040.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0041.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0042.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0043.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0044.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0045.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0046.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0047.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0048.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0049.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0050.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0051.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0052.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0053.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0054.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0055.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0056.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0057.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0058.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0059.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0060.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0061.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0062.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0063.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0064.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0065.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0066.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0067.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0068.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0069.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0070.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0071.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0072.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0073.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0074.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0075.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0076.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0077.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0078.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0079.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0080.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0081.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0082.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0083.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0084.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0085.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0086.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0087.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0088.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0089.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0090.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0091.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0092.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0093.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0094.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0095.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0096.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0097.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0098.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0099.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0100.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0101.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0102.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0103.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0104.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0105.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0106.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0107.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0108.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0109.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0110.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0111.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0112.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0113.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0114.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0115.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0116.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0117.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0118.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0119.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0120.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0121.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0122.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0123.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0124.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0125.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0126.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0127.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0128.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0129.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0130.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0131.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0132.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0133.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0134.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0135.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0136.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0137.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0138.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0139.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0140.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0141.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0142.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0143.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0144.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0145.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0146.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0147.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0148.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0149.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0150.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0151.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0152.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0153.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0154.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0155.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0156.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0157.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0158.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0159.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0160.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0161.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0162.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0163.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0164.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0165.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0166.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0167.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0168.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0169.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0170.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0171.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0172.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0173.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0174.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0175.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0176.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0177.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0178.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0179.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0180.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0181.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0182.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0183.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0184.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0185.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0186.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0187.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0188.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0189.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0190.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0191.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0192.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0193.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0194.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0195.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0196.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0197.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0198.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0199.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0200.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0201.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0202.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0203.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0204.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0205.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0206.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0207.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0208.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0209.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0210.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0211.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0212.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0213.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0214.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0215.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0216.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0217.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0218.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0219.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0220.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0221.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0222.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0223.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0224.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0225.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0226.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0227.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0228.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0229.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0230.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0231.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0232.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0233.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0234.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0235.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0236.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0237.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0238.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0239.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0240.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0241.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0242.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0243.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0244.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0245.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0246.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0247.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0248.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0249.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0250.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0251.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0252.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0253.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0254.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0255.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0256.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0257.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0258.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0259.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0260.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0261.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0262.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0263.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0264.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0265.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0266.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0267.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0268.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0269.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0270.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0271.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0272.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0273.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0274.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0275.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0276.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0277.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0278.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0279.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0280.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0281.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0282.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0283.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0284.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0285.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0286.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0287.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0288.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0289.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0290.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0291.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0292.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0293.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0294.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0295.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0296.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0297.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0298.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0299.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0300.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0301.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0302.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0303.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0304.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0305.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0306.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0307.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0308.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0309.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0310.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0311.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0312.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0313.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0314.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0315.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0316.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0317.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0318.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0319.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0320.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0321.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0322.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0323.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0324.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0325.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0326.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0327.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0328.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0329.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0330.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0331.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0332.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0333.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0334.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0335.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0336.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0337.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0338.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0339.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0340.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0341.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0342.jpg": {
+        "denominacion": "100",
+        "lado": "reverso"
+    },
+    "0343.jpg": {
+        "denominacion": "100",
+        "lado": "frontal"
+    },
+    "0344.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0345.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0346.jpg": {
+        "denominacion": "5",
+        "lado": "reverso"
+    },
+    "0347.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0348.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0349.jpg": {
+        "denominacion": "20",
+        "lado": "frontal"
+    },
+    "0350.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0351.jpg": {
+        "denominacion": "10",
+        "lado": "frontal"
+    },
+    "0352.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0353.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0354.jpg": {
+        "denominacion": "500",
+        "lado": "reverso"
+    },
+    "0355.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0356.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0357.jpg": {
+        "denominacion": "1",
+        "lado": "reverso"
+    },
+    "0358.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0359.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0360.jpg": {
+        "denominacion": "10",
+        "lado": "reverso"
+    },
+    "0361.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0362.jpg": {
+        "denominacion": "500",
+        "lado": "frontal"
+    },
+    "0363.jpg": {
+        "denominacion": "20",
+        "lado": "reverso"
+    },
+    "0364.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    },
+    "0365.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0366.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0367.jpg": {
+        "denominacion": "5",
+        "lado": "frontal"
+    },
+    "0368.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0369.jpg": {
+        "denominacion": "2",
+        "lado": "reverso"
+    },
+    "0370.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0371.jpg": {
+        "denominacion": "2",
+        "lado": "frontal"
+    },
+    "0372.jpg": {
+        "denominacion": "50",
+        "lado": "frontal"
+    },
+    "0373.jpg": {
+        "denominacion": "1",
+        "lado": "frontal"
+    },
+    "0374.jpg": {
+        "denominacion": "50",
+        "lado": "reverso"
+    }
+}
