@@ -6,7 +6,7 @@ def autoCanny(img):
     medianaVector = np.median(img)
     sigma = 0.33
     lowerThre = int(max(0,(1.0 - sigma) * medianaVector))
-    upperThre = int(min(255,(1.0 - sigma) * medianaVector))
+    upperThre = int(min(255,(1.0 + sigma) * medianaVector))
     imgCanny = cv.Canny(img,lowerThre,upperThre)
     return imgCanny
 
@@ -28,7 +28,6 @@ def preProcesamiento(img,numCanny):
 
     return imgErode
     
-
 def getContornosBillete(img):
     imgContornos = img.copy()
 
@@ -71,6 +70,7 @@ def getContornosBillete(img):
         
     #si no encuentra quitará un porcentaje alrededor de la foto
     if areaMasAdecuada == 0:
+        print("aca")    
         if altoImg == 512:
             quitarW = int(( 7 * largoImg ) / 100)
             quitarH = int(( 20 * altoImg ) / 100)
@@ -88,10 +88,13 @@ def getContornosBillete(img):
     return retVal
 
 def main(argv):
-    foto = cv.imread(argv[0])
+    fotoOriginal = cv.imread(argv[0])
+    billete = getContornosBillete(fotoOriginal)
+
+    cv.imshow("ds",fotoOriginal)    
+    cv.waitKey(0)
     
-    img = getContornosBillete(foto)
-    cv.imshow("IMG",img)
+    cv.imshow("IMG",billete)    
     cv.waitKey(0)
 
 if __name__ == "__main__":
