@@ -1,6 +1,22 @@
 import sys
+import os
 import cv2 as cv
 import numpy as np
+import csv
+import time
+from sklearn import cluster,utils
+import joblib
+
+def cargarImagenes(directorio):
+    fotos = []
+    i = 0
+    for archivo in sorted(os.listdir(directorio)):
+        if i == 5:
+            break
+        img = cv.imread(os.path.join(directorio,archivo))
+        fotos.append((archivo, getContornosBillete(img)))
+        i+=1
+    return fotos
 
 def autoCanny(img):
     medianaVector = np.median(img)
@@ -69,8 +85,7 @@ def getContornosBillete(img):
                                 areaMasAdecuada = areaEncontrada
         
     #si no encuentra quitará un porcentaje alrededor de la foto
-    if areaMasAdecuada == 0:
-        print("aca")    
+    if areaMasAdecuada == 0: 
         if altoImg == 512:
             quitarW = int(( 7 * largoImg ) / 100)
             quitarH = int(( 20 * altoImg ) / 100)
@@ -85,17 +100,63 @@ def getContornosBillete(img):
         x, y, w, h = cv.boundingRect(approx) 
         retVal = imgContornos[y:(h+y),x:(w+x)]                   
 
+    if largoImg == 512:
+        retVal= cv.rotate(retVal, cv.cv2.ROTATE_90_COUNTERCLOCKWISE)
+
     return retVal
 
-def main(argv):
-    fotoOriginal = cv.imread(argv[0])
-    billete = getContornosBillete(fotoOriginal)
+#funcion que retorna los descriptores de los puntos clave de la foto
+def getDescriptores(fotos):
+    brisk = cv.BRISK_create(30)
+    descriptores = []
+    sum = 0
+    for nombreArchivo,foto in fotos:
+        puntosClave, descriptor = brisk.detectAndCompute(foto,None)        
+        
+        extraer = int(len(descriptor) * 0.40)
+        nuevoDescr = utils.shuffle(descriptor)
 
-    cv.imshow("ds",fotoOriginal)    
-    cv.waitKey(0)
+        descriptores.append((nombreArchivo,nuevoDescr[:extraer]))
+    #convertir a 1 fila
+    descriptoresFila = descriptores[0][1]
+    for nombreArchivo, descriptor in descriptores[1:]:
+        descriptoresFila = np.vstack((descriptoresFila, descriptor))
     
-    cv.imshow("IMG",billete)    
-    cv.waitKey(0)
+    #convertir a float
+    descriptoresFloat = descriptoresFila.astype(float)
+    return (descriptores, descriptoresFloat)
+
+#funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
+def kMeans(descriptores, descriptoresFloat):    
+    k = 200
+    kmean = cluster.KMeans(n_clusters=k)
+    kmean = kmean.fit(descriptoresFloat)
+    joblib.dump((kmean, k),"bovw.pkl",compress=3)
+    '''histogramas = np.zeros((40,k),"float32")
+    for i in range(40):
+        
+        predicciones =  fit.predict(descriptores[i][1])
+        for prediccion in predicciones:
+            histogramas[i][prediccion] += 1
+
+    return histogramas'''
+
+def extraerCaracteristicas(fotos, archivoSalida):    
+    descriptores, descriptoresFloat = getDescriptores(fotos)
+    kMeans(descriptores, descriptoresFloat)
+
+    '''with open(archivoSalida, "w") as file:
+        writer = csv.writer(file)
+        writer.writerows(histogramas)'''
+
+def main(argv):
+    fotos = cargarImagenes(argv[0])
+    timeInicio = time.time()      
+    extraerCaracteristicas(fotos, argv[1])      
+    timeFinal = time.time()
+    timeT = timeFinal - timeInicio
+    print("Le tomo %s segundos" % (timeT))
+    
 
 if __name__ == "__main__":
     main(sys.argv[1:])
