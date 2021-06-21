@@ -3,9 +3,6 @@ import os
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plot
-from numpy.core.numeric import empty_like
-from numpy.core.records import array
-from numpy.core.shape_base import hstack, vstack
 import csv
 import time
 from sklearn import cluster
@@ -15,8 +12,6 @@ def cargarImagenes(directorio):
     fotos = []
     cantArchivos = 0
     for archivo in sorted(os.listdir(directorio)):
-        if cantArchivos == 5:
-            break
         img = cv.imread(os.path.join(directorio,archivo))
         fotos.append((archivo, getContornosBillete(img)))
         cantArchivos+=1
@@ -242,7 +237,7 @@ def findColor(img):
 def empty(a):
     pass
 
-
+'''
 def main(argv):
     carpeta = "training_image_dataset/"
     l1 = [carpeta+"0001.jpg", carpeta+"0002.jpg", carpeta+"0006.jpg", carpeta+"0013.jpg", carpeta+"0019.jpg",
@@ -269,7 +264,7 @@ def main(argv):
         cv.imshow("foto a evaluar", bill)
         cv.waitKey(0)
         findColor(bill)
-
+'''
 # cv.imshow("IMG",billete)
 
 #funcion que retorna los descriptores de los puntos clave de la foto
