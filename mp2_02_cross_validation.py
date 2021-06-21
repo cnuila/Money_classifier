@@ -225,11 +225,7 @@ def main(argv):
 
     descriptores = joblib.load(argv[0])
     inEtiquetas = leerJSON(argv[1])
-    inFolds = int(argv[2])
-
-    #normalizar datos
-    #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
-    #inFeatures = stdScaler.transform(inFeatures)
+    inFolds = int(argv[2])  
 
     busquedaParametros(descriptores,inEtiquetas,inFolds)    
 

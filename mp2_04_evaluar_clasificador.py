@@ -42,10 +42,6 @@ def main(argv):
     archivoSalida = argv[3]
     
     evaluar(descriptores,codeBook,k, clasificador, archivoSalida, nombreFotos)
-    
-    #normalizar datos
-    #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
-    #inFeatures = stdScaler.transform(inFeatures)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

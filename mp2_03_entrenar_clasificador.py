@@ -147,10 +147,6 @@ def main(argv):
     clasificadorSalida = argv[3]
 
     entrenar(descriptores,clases, codeBookSalida, clasificadorSalida)
-    
-    #normalizar datos
-    #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
-    #inFeatures = stdScaler.transform(inFeatures)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
