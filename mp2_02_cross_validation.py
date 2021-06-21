@@ -1,11 +1,9 @@
 import sys
 import pandas as pd
-import os
 import json
-import cv2 as cv
 import numpy as np
 import joblib
-from sklearn import ensemble, utils, metrics, preprocessing, cluster
+from sklearn import ensemble, utils, metrics, cluster
 from random import randint
 
 #calcula las estadisticas de cada clase (precision, recall, f1-score)
@@ -228,30 +226,9 @@ def main(argv):
 
     descriptores = joblib.load(argv[0])
     inEtiquetas = leerJSON(argv[1])
-    inFolds = int(argv[2])
+    inFolds = int(argv[2])  
 
-    #normalizar datos
-    #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
-    #inFeatures = stdScaler.transform(inFeatures)
-
-    busquedaParametros(descriptores,inEtiquetas,inFolds)
-
-    '''atributos = ["animada", "basada_libro", "clasificacion", "desenlace_feliz",
-                 "duracion", "narracion", "origen", "saga", "tiempo", "trama"]
-    x_entrenamiento = convertirDatosArboles(
-        datosEntrenamiento[atributos].values)
-    x_prueba = convertirDatosArboles(datosPrueba[atributos].values)
-
-    # extraer la clase a la que pertenece cada dato
-    y_entrenamiento = np.reshape(datosEntrenamiento[["class"]].values, 200)
-    y_prueba = np.reshape(datosPrueba[["class"]].values, 200)
-
-    
-    randomForest = ensemble.RandomForestClassifier(n_estimators=69,max_depth=4,criterion="gini",max_features=3)
-    randomForest.fit(x_entrenamiento,y_entrenamiento)
-    y_pred = randomForest.predict(x_prueba)
-    
-    estadisticasPorClase(y_prueba,y_pred)'''
+    busquedaParametros(descriptores,inEtiquetas,inFolds)    
 
 
 if __name__ == "__main__":

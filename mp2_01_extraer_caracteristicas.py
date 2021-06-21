@@ -238,14 +238,6 @@ def getDescriptores(fotos, archivoDescriptores):
 
     joblib.dump(descriptores,archivoDescriptores,compress=3)
 
-''''def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
-    descriptores, descriptoresFloat = getDescriptores(fotos,esPrueba)
-    histogramas = kMeans(descriptores, descriptoresFloat, esPrueba,archivoCodeBook,cantArchivos)
-
-    with open(archivoSalida, "w") as file:
-        writer = csv.writer(file)
-        writer.writerows(histogramas)'''
-
 def main(argv):
     fotos = cargarImagenes(argv[0])
     getDescriptores(fotos,argv[1])

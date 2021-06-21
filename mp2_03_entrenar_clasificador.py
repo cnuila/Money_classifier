@@ -1,7 +1,8 @@
 import sys
-import pandas as pd
 import json
-from sklearn import ensemble, utils, metrics, preprocessing,externals
+import numpy as np
+import joblib
+from sklearn import ensemble, metrics,cluster
 
 #leer las clases de cada foto
 def leerJSON(nombreArchivo):
@@ -95,27 +96,57 @@ def imprimirMatrizConfusion(clase, matriz):
         print("")
         cont+=1 
 
-def entrenar(x, y):
-    x_entrenamiento = x.values
-    y_entrenamiento = y.values
+#funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
+def kMeans(descriptores, k, archivoSalida):        
+
+    #convertir a 1 fila
+    descriptoresFila = descriptores[0][1]
+    for nombreArchivo, descriptor in descriptores[1:]:
+        descriptoresFila = np.vstack((descriptoresFila, descriptor))
+
+    #convertir a float
+    descriptoresFloat = descriptoresFila.astype(float)
+
+    kmean = cluster.MiniBatchKMeans(n_clusters=k)
+    kmean = kmean.fit(descriptoresFloat)
+
+    joblib.dump((kmean,k),archivoSalida)
+
+    return kmean
+        
+def crearHistograma(kmean, descriptores, k):
+    histogramas = np.zeros((len(descriptores),k),"float32")
+    for i in range(len(descriptores)):
+        predicciones =  kmean.predict(descriptores[i][1])
+        for prediccion in predicciones:
+            histogramas[i][prediccion] += 1
+
+    return histogramas
+
+def entrenar(descriptores, clases, codeBookSalida, clasificadorSalida):
+    k = 192
+
+    codeBook = kMeans(descriptores,k,codeBookSalida)    
+    
+    x_entrenamiento = crearHistograma(codeBook,descriptores,k)
+    y_entrenamiento = clases
 
     #con datos del cross validation
-    randomForest = ensemble.RandomForestClassifier(n_estimators=69,max_depth=4,criterion="gini",max_features=3)
-    randomForest.fit(x_entrenamiento,y_entrenamiento)
+    randomForest = ensemble.RandomForestClassifier(n_estimators=69,max_depth=26,criterion="gini",max_features=3)
+    randomForest.fit(x_entrenamiento,y_entrenamiento)    
     y_pred = randomForest.predict(x_entrenamiento)
 
+    joblib.dump((randomForest),clasificadorSalida)
+
     estadisticasPorClase(y_entrenamiento,y_pred)
-    #externals.joblib.dum
 
 def main(argv):
-    inFeatures = pd.read_csv(argv[0])
-    
-    #normalizar datos
-    #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
-    #inFeatures = stdScaler.transform(inFeatures)
+    descriptores = joblib.load(argv[0])
+    clases = leerJSON(argv[1])
+    codeBookSalida = argv[2]
+    clasificadorSalida = argv[3]
 
-    inEtiquetas = leerJSON(argv[1])
-    inFolds = int(argv[2])
+    entrenar(descriptores,clases, codeBookSalida, clasificadorSalida)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
