@@ -1,9 +1,11 @@
 import sys
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn import ensemble, utils, metrics, preprocessing
+import os
 import json
+import cv2 as cv
+import numpy as np
+import joblib
+from sklearn import ensemble, utils, metrics, preprocessing, cluster
 from random import randint
 
 #calcula las estadisticas de cada clase (precision, recall, f1-score)
@@ -128,14 +130,17 @@ def generarIteracionUnica(iteraciones):
     nEstimators = randint(40, 80)
     criterion = criterios[randint(0, 1)]
     maxFeatures = randint(1, 6)
-    nuevaIteracion = [nEstimators, maxDepth, criterion, maxFeatures]
+    k = randint(1,32) * 64
+
+    nuevaIteracion = [nEstimators, maxDepth, criterion, maxFeatures, k]
 
     while not esIteracionUnica(iteraciones, nuevaIteracion):
         maxDepth = listaMaxDepth[randint(0, 9)]
         nEstimators = randint(40, 80)
         criterion = criterios[randint(0, 1)]
         maxFeatures = randint(1, 6)
-        nuevaIteracion = [nEstimators, maxDepth, criterion, maxFeatures]
+        k = randint(1,32) * 64
+        nuevaIteracion = [nEstimators, maxDepth, criterion, maxFeatures, k]
 
     return nuevaIteracion
 
@@ -151,7 +156,7 @@ def esIteracionUnica(iteraciones, nuevaIteracion):
     return True
 
 #ajustar los hiper parametros con n-fold cross-validation
-def busquedaParametros(x_entrenamiento, y_entrenamiento, inFolds):
+def busquedaParametros(descriptores,y_entrenamiento,inFolds):
     iteraciones = []   
 
     mayorPromedio = 0.605
@@ -162,11 +167,13 @@ def busquedaParametros(x_entrenamiento, y_entrenamiento, inFolds):
         iteracion = generarIteracionUnica(iteraciones)   
         iteraciones.append(iteracion)
 
+        x_entrenamiento = kMeans(descriptores,iteracion[4])
+
         randomForest = ensemble.RandomForestClassifier(n_estimators=iteracion[0],max_depth=iteracion[1],criterion=iteracion[2],max_features=iteracion[3])        
         print("---------------------------------------------")
         print("Configuracion ",cont)
         cont+=1
-        score = crossValidation(randomForest,x_entrenamiento,y_entrenamiento,inFolds)
+        score = crossValidation(randomForest,x_entrenamiento, y_entrenamiento,inFolds)
         print(iteracion)
         print("Promedio:",score)
         nuevoPromedio = score    
@@ -192,17 +199,40 @@ def leerJSON(nombreArchivo):
             i+=1
     return clases
 
-def main(argv):    
-    inFeatures = pd.read_csv(argv[0])
+#funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
+def kMeans(descriptores, k):        
+
+    #convertir a 1 fila
+    descriptoresFila = descriptores[0][1]
+    for nombreArchivo, descriptor in descriptores[1:]:
+        descriptoresFila = np.vstack((descriptoresFila, descriptor))
+
+    #convertir a float
+    descriptoresFloat = descriptoresFila.astype(float)
+
+    kmean = cluster.KMeans(n_clusters=k)
+
+    kmean = kmean.fit(descriptoresFloat)
     
+    histogramas = np.zeros((len(descriptores),k),"float32")
+    for i in range(len(descriptores)):
+        predicciones =  kmean.predict(descriptores[i][1])
+        for prediccion in predicciones:
+            histogramas[i][prediccion] += 1
+
+    return histogramas
+
+def main(argv):          
+
+    descriptores = joblib.load(argv[0])
+    inEtiquetas = leerJSON(argv[1])
+    inFolds = int(argv[2])
+
     #normalizar datos
     #stdScaler = preprocessing.StandardScaler().fit(inFeatures)
     #inFeatures = stdScaler.transform(inFeatures)
 
-    inEtiquetas = leerJSON(argv[1])
-    inFolds = int(argv[2])
-
-    busquedaParametros(inFeatures,inEtiquetas,inFolds)
+    busquedaParametros(descriptores,inEtiquetas,inFolds)
 
     '''atributos = ["animada", "basada_libro", "clasificacion", "desenlace_feliz",
                  "duracion", "narracion", "origen", "saga", "tiempo", "trama"]
