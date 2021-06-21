@@ -1,58 +1,67 @@
 import sys
 import cv2 as cv
 import numpy as np
+from matplotlib import pyplot as plot
+from numpy.core.numeric import empty_like
+from numpy.core.records import array
+from numpy.core.shape_base import hstack, vstack
+
 
 def autoCanny(img):
     medianaVector = np.median(img)
     sigma = 0.33
-    lowerThre = int(max(0,(1.0 - sigma) * medianaVector))
-    upperThre = int(min(255,(1.0 + sigma) * medianaVector))
-    imgCanny = cv.Canny(img,lowerThre,upperThre)
+    lowerThre = int(max(0, (1.0 - sigma) * medianaVector))
+    upperThre = int(min(255, (1.0 + sigma) * medianaVector))
+    imgCanny = cv.Canny(img, lowerThre, upperThre)
     return imgCanny
 
-#0 wide, 1 tight, 2 automatico con mediana
-def preProcesamiento(img,numCanny):
-    imgGray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
-    imgBlur = cv.GaussianBlur(imgGray,(3,3),1) 
-   
+# 0 wide, 1 tight, 2 automatico con mediana
+
+
+def preProcesamiento(img, numCanny):
+    imgGray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    imgBlur = cv.GaussianBlur(imgGray, (3, 3), 1)
+
     if numCanny == 0:
-        imgCanny = cv.Canny(imgBlur,10,200)
+        imgCanny = cv.Canny(imgBlur, 10, 200)
     elif numCanny == 1:
-        imgCanny = cv.Canny(imgBlur,255,250)
+        imgCanny = cv.Canny(imgBlur, 255, 250)
     else:
         imgCanny = autoCanny(imgBlur)
 
-    kernel = np.ones((2,2))
-    imgDial = cv.dilate(imgCanny,kernel,iterations=2)
-    imgErode = cv.erode(imgDial,kernel,iterations=1)
+    kernel = np.ones((2, 2))
+    imgDial = cv.dilate(imgCanny, kernel, iterations=2)
+    imgErode = cv.erode(imgDial, kernel, iterations=1)
 
     return imgErode
-    
+
+
 def getContornosBillete(img):
     imgContornos = img.copy()
 
     areaMasAdecuada = 0
     contornoMasAdecuado = 0
 
-    altoImg,largoImg,canales = img.shape
+    altoImg, largoImg, canales = img.shape
     for i in range(3):
-        imgEdges = preProcesamiento(img,i)
-        contornos, jerarquia = cv.findContours(imgEdges,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_NONE) 
+        imgEdges = preProcesamiento(img, i)
+        contornos, jerarquia = cv.findContours(
+            imgEdges, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
 
         for contorno in contornos:
-            perimetro = cv.arcLength(contorno,True)                
+            perimetro = cv.arcLength(contorno, True)
 
-            approxEsquinas = cv.approxPolyDP(contorno,0.02*perimetro, True)            
+            approxEsquinas = cv.approxPolyDP(contorno, 0.02*perimetro, True)
 
             x, y, w, h = cv.boundingRect(approxEsquinas)
-            
+
             areaEncontrada = w * h
             areaTotal = altoImg * largoImg
 
             porcentajeW = (w * 100) / largoImg
             porcentajeH = (h * 100) / altoImg
             porcentajeA = (areaEncontrada * 100) / areaTotal
-                    
+
             if altoImg == 512:
                 if porcentajeA > 33 and porcentajeA < 83:
                     if porcentajeW > 66 and porcentajeW <= 95:
@@ -67,35 +76,185 @@ def getContornosBillete(img):
                             if areaMasAdecuada < areaEncontrada:
                                 contornoMasAdecuado = contorno
                                 areaMasAdecuada = areaEncontrada
-        
-    #si no encuentra quitará un porcentaje alrededor de la foto
-    if areaMasAdecuada == 0:
-        print("aca")    
-        if altoImg == 512:
-            quitarW = int(( 7 * largoImg ) / 100)
-            quitarH = int(( 20 * altoImg ) / 100)
-        elif largoImg == 512:
-            quitarW = int(( 20 * largoImg ) / 100)
-            quitarH = int(( 7 * altoImg ) / 100)
 
-        retVal = imgContornos[quitarH:altoImg-quitarH,quitarW:largoImg-quitarW]
+    # si no encuentra quitará un porcentaje alrededor de la foto
+
+    if areaMasAdecuada == 0:
+        if altoImg == 512:
+            quitarW = int((7 * largoImg) / 100)
+            quitarH = int((20 * altoImg) / 100)
+        elif largoImg == 512:
+            quitarW = int((20 * largoImg) / 100)
+            quitarH = int((7 * altoImg) / 100)
+
+        retVal = imgContornos[quitarH:altoImg -
+                              quitarH, quitarW:largoImg-quitarW]
+
     else:
-        perimetro = cv.arcLength(contornoMasAdecuado,True)
-        approx = cv.approxPolyDP(contornoMasAdecuado,0.02*perimetro, True)
-        x, y, w, h = cv.boundingRect(approx) 
-        retVal = imgContornos[y:(h+y),x:(w+x)]                   
+        perimetro = cv.arcLength(contornoMasAdecuado, True)
+        approx = cv.approxPolyDP(contornoMasAdecuado, 0.02*perimetro, True)
+        x, y, w, h = cv.boundingRect(approx)
+        retVal = imgContornos[y:(h+y), x:(w+x)]
+
+    if largoImg == 512:
+        retVal = cv.rotate(retVal, cv.cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     return retVal
 
-def main(argv):
-    fotoOriginal = cv.imread(argv[0])
-    billete = getContornosBillete(fotoOriginal)
 
-    cv.imshow("ds",fotoOriginal)    
-    cv.waitKey(0)
+def loadModels():
+    billete1 = cv.imread("Modelos/1 Lempira.jpg")
+    billete2 = cv.imread("Modelos/2 Lempiras.jpg")
+    billete5 = cv.imread("Modelos/5 Lempiras.jpg")
+    billete10 = cv.imread("Modelos/10 Lempiras.jpg")
+    billete20 = cv.imread("Modelos/20 Lempiras.jpg")
+    billete50 = cv.imread("Modelos/50 Lempiras.jpg")
+    billete100 = cv.imread("Modelos/100 Lempiras.jpg")
+    billete500 = cv.imread("Modelos/500 Lempiras.jpg")
+
+    billete1HSV = cv.cvtColor(billete1, cv.COLOR_BGR2HSV)
+    billete2HSV = cv.cvtColor(billete2, cv.COLOR_BGR2HSV)
+    billete5HSV = cv.cvtColor(billete5, cv.COLOR_BGR2HSV)
+    billete10HSV = cv.cvtColor(billete10, cv.COLOR_BGR2HSV)
+    billete20HSV = cv.cvtColor(billete20, cv.COLOR_BGR2HSV)
+    billete50HSV = cv.cvtColor(billete50, cv.COLOR_BGR2HSV)
+    billete100HSV = cv.cvtColor(billete100, cv.COLOR_BGR2HSV)
+    billete500HSV = cv.cvtColor(billete500, cv.COLOR_BGR2HSV)
+
+    l1= np.array([0, 0, 0])
+    u1= np.array([9, 255, 255])
+    mask1 = cv.inRange(billete1HSV,l1,u1)
+    result1 = cv.bitwise_and(billete1, billete1, mask=mask1)
+
+    l2= np.array([113, 8, 0])
+    u2= np.array([173, 255, 255])
+    mask2 = cv.inRange(billete2HSV,l2,u2)
+    result2 = cv.bitwise_and(billete2, billete2, mask=mask2)
+
+    l5= np.array([13, 0, 0])
+    u5= np.array([179, 35, 174])
+    mask5 = cv.inRange(billete5HSV,l5,u5)
+    result5 = cv.bitwise_and(billete5, billete5, mask=mask5)
+
+    l10= np.array( [0, 20, 0])
+    u10= np.array( [179, 255, 186])
+    mask10 = cv.inRange(billete10HSV,l10,u10)
+    result10 = cv.bitwise_and(billete10, billete10, mask=mask10)
+
+    l20= np.array( [23, 0, 0])
+    u20= np.array([179, 255, 255])
+    mask20 = cv.inRange(billete20HSV,l20,u20)
+    result20 = cv.bitwise_and(billete20, billete20, mask=mask20)
+
+    l50= np.array([24, 0, 0])
+    u50= np.array([179, 255, 255])
+    mask50 = cv.inRange(billete50HSV,l50,u50)
+    result50 = cv.bitwise_and(billete50, billete50, mask=mask50)
+
+    l100= np.array([0, 28, 0])
+    u100= np.array([28, 255, 255])
+    mask100 = cv.inRange(billete100HSV,l100,u100)
+    result100 = cv.bitwise_and(billete100, billete100, mask=mask100)
     
-    cv.imshow("IMG",billete)    
-    cv.waitKey(0)
+    l500= np.array([89, 24, 31])
+    u500= np.array([179, 255, 215])
+    mask500 = cv.inRange(billete500HSV,l500,u500)
+    result500 = cv.bitwise_and(billete500, billete500, mask=mask500)
+
+    arrayPics = [result1, result2, result5, result10,
+                 result20, result50, result100, result500]
+    arrayPics2 = [billete1,billete2,billete5,billete10,billete20,billete50,billete100,billete500]
+    arrayModels = []
+
+    for model in arrayPics2:
+        histModel = cv.calcHist(model, [0], None, [255], [1, 255])
+        histModel = cv.normalize(histModel, histModel).flatten()
+        arrayModels.append(histModel)
+    return arrayModels
+
+
+def findColor(img):
+    arrayModels = loadModels()
+    arrayNames = ["1l", "2l", "5l", "10l", "20l", "50l", "100l", "500l"]
+
+    compArray = np.zeros(8)
+
+    billeteHSV = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+
+    l = np.array([6, 12, 1])
+    u = np.array([179, 187, 210])
+    mask = cv.inRange(billeteHSV,l,u)
+    result = cv.bitwise_and(img,img, mask=mask)
+
+    cv.imshow("foto a evaluar", result)
+    cv.waitKey(2000)
+
+    histBillete = cv.calcHist(result, [0], None,  [255], [1, 255])
+    histBillete = cv.normalize(histBillete, histBillete).flatten()
+
+    cont = 0
+    for histModel in arrayModels:
+        metricV = cv.compareHist(histBillete, histModel, cv.HISTCMP_INTERSECT)
+        compArray[cont] = metricV
+        cont += 1
+
+        plot.plot(histModel)
+        plot.plot(histBillete)
+        plot.show()
+
+    distribution = compArray/np.sum(compArray)
+    print("Comparison Array:")
+    print(compArray)
+    print("Distribution Array: ")
+    print(distribution)
+
+    total_objects = 8
+    label_objects = ('1', '2', '5', '10', '20', '50', '100', '500')
+    font_size = 20
+    width = 0.5
+    plot.barh(np.arange(total_objects), distribution, width, color='r')
+    plot.yticks(np.arange(total_objects) + width/2.,
+                label_objects, rotation=0, size=font_size)
+    plot.xlim(0.0, 1.0)
+    plot.ylim(-0.5, 8.0)
+    plot.xlabel('Probability', size=font_size)
+
+    plot.show()
+
+
+def empty(a):
+    pass
+
+
+def main(argv):
+    carpeta = "training_image_dataset/"
+    l1 = [carpeta+"0001.jpg", carpeta+"0002.jpg", carpeta+"0006.jpg", carpeta+"0013.jpg", carpeta+"0019.jpg",
+          carpeta+"0025.jpg", carpeta+"0034.jpg", carpeta+"0045.jpg", carpeta+"0068.jpg", carpeta+"0086.jpg"]
+    l2 = [carpeta+"0027.jpg", carpeta+"0090.jpg", carpeta+"0087.jpg", carpeta+"0024.jpg", carpeta+"0106.jpg",
+          carpeta+"0159.jpg", carpeta+"0158.jpg", carpeta+"0160.jpg", carpeta+"0166.jpg", carpeta+"0223.jpg"]
+    l5 = [carpeta+"0011.jpg", carpeta+"0014.jpg", carpeta+"0022.jpg", carpeta+"0061.jpg", carpeta+"0058.jpg",
+          carpeta+"0123.jpg", carpeta+"0115.jpg", carpeta+"0097.jpg", carpeta+"0182.jpg", carpeta+"0308.jpg"]
+    l10 = [carpeta+"0043.jpg", carpeta+"0009.jpg", carpeta+"0071.jpg", carpeta+"0178.jpg", carpeta+"0189.jpg",
+           carpeta+"0236.jpg", carpeta+"0235.jpg", carpeta+"0217.jpg", carpeta+"0215.jpg", carpeta+"0353.jpg"]
+    l20 = [carpeta+"0083.jpg", carpeta+"0092.jpg", carpeta+"0094.jpg", carpeta+"0005.jpg", carpeta+"0029.jpg",
+           carpeta+"0111.jpg", carpeta+"0063.jpg", carpeta+"0221.jpg", carpeta+"0225.jpg", carpeta+"0210.jpg"]
+    l50 = [carpeta+"0056.jpg", carpeta+"0047.jpg", carpeta+"0077.jpg", carpeta+"0017.jpg", carpeta+"0078.jpg",
+           carpeta+"0130.jpg", carpeta+"0152.jpg", carpeta+"0196.jpg", carpeta+"0200.jpg", carpeta+"0306.jpg"]
+    l100 = [carpeta+"0059.jpg", carpeta+"0088.jpg", carpeta+"0018.jpg", carpeta+"0000.jpg", carpeta+"0052.jpg",
+            carpeta+"0057.jpg", carpeta+"0076.jpg", carpeta+"0343.jpg", carpeta+"0199.jpg", carpeta+"0228.jpg"]
+    l500 = [carpeta+"0050.jpg", carpeta+"0064.jpg", carpeta+"0100.jpg", carpeta+"0107.jpg", carpeta+"0141.jpg",
+            carpeta+"0163.jpg", carpeta+"0197.jpg", carpeta+"0108.jpg", carpeta+"0153.jpg", carpeta+"0187.jpg"]
+
+    arrayEva = l20
+    for billete in arrayEva:
+        bill = cv.imread(billete)
+        bill = getContornosBillete(bill)
+        cv.imshow("foto a evaluar", bill)
+        cv.waitKey(0)
+        findColor(bill)
+
+# cv.imshow("IMG",billete)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
