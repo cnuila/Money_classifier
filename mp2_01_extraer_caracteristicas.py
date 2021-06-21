@@ -3,9 +3,6 @@ import os
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plot
-import csv
-import time
-from sklearn import cluster
 import joblib
 
 def cargarImagenes(directorio):
@@ -26,8 +23,6 @@ def autoCanny(img):
     return imgCanny
 
 # 0 wide, 1 tight, 2 automatico con mediana
-
-
 def preProcesamiento(img, numCanny):
     imgGray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     imgBlur = cv.GaussianBlur(imgGray, (3, 3), 1)
@@ -44,7 +39,6 @@ def preProcesamiento(img, numCanny):
     imgErode = cv.erode(imgDial, kernel, iterations=1)
 
     return imgErode
-
 
 def getContornosBillete(img):
     imgContornos = img.copy()
@@ -112,7 +106,6 @@ def getContornosBillete(img):
         retVal= cv.rotate(retVal, cv.cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     return retVal
-
 
 def loadModels():
     billete1 = cv.imread("Modelos/1 Lempira.jpg")
@@ -184,7 +177,6 @@ def loadModels():
         arrayModels.append(histModel)
     return arrayModels
 
-
 def findColor(img):
     arrayModels = loadModels()
     arrayNames = ["1l", "2l", "5l", "10l", "20l", "50l", "100l", "500l"]
@@ -233,92 +225,31 @@ def findColor(img):
 
     plot.show()
 
-
 def empty(a):
     pass
 
-'''
-def main(argv):
-    carpeta = "training_image_dataset/"
-    l1 = [carpeta+"0001.jpg", carpeta+"0002.jpg", carpeta+"0006.jpg", carpeta+"0013.jpg", carpeta+"0019.jpg",
-          carpeta+"0025.jpg", carpeta+"0034.jpg", carpeta+"0045.jpg", carpeta+"0068.jpg", carpeta+"0086.jpg"]
-    l2 = [carpeta+"0027.jpg", carpeta+"0090.jpg", carpeta+"0087.jpg", carpeta+"0024.jpg", carpeta+"0106.jpg",
-          carpeta+"0159.jpg", carpeta+"0158.jpg", carpeta+"0160.jpg", carpeta+"0166.jpg", carpeta+"0223.jpg"]
-    l5 = [carpeta+"0011.jpg", carpeta+"0014.jpg", carpeta+"0022.jpg", carpeta+"0061.jpg", carpeta+"0058.jpg",
-          carpeta+"0123.jpg", carpeta+"0115.jpg", carpeta+"0097.jpg", carpeta+"0182.jpg", carpeta+"0308.jpg"]
-    l10 = [carpeta+"0043.jpg", carpeta+"0009.jpg", carpeta+"0071.jpg", carpeta+"0178.jpg", carpeta+"0189.jpg",
-           carpeta+"0236.jpg", carpeta+"0235.jpg", carpeta+"0217.jpg", carpeta+"0215.jpg", carpeta+"0353.jpg"]
-    l20 = [carpeta+"0083.jpg", carpeta+"0092.jpg", carpeta+"0094.jpg", carpeta+"0005.jpg", carpeta+"0029.jpg",
-           carpeta+"0111.jpg", carpeta+"0063.jpg", carpeta+"0221.jpg", carpeta+"0225.jpg", carpeta+"0210.jpg"]
-    l50 = [carpeta+"0056.jpg", carpeta+"0047.jpg", carpeta+"0077.jpg", carpeta+"0017.jpg", carpeta+"0078.jpg",
-           carpeta+"0130.jpg", carpeta+"0152.jpg", carpeta+"0196.jpg", carpeta+"0200.jpg", carpeta+"0306.jpg"]
-    l100 = [carpeta+"0059.jpg", carpeta+"0088.jpg", carpeta+"0018.jpg", carpeta+"0000.jpg", carpeta+"0052.jpg",
-            carpeta+"0057.jpg", carpeta+"0076.jpg", carpeta+"0343.jpg", carpeta+"0199.jpg", carpeta+"0228.jpg"]
-    l500 = [carpeta+"0050.jpg", carpeta+"0064.jpg", carpeta+"0100.jpg", carpeta+"0107.jpg", carpeta+"0141.jpg",
-            carpeta+"0163.jpg", carpeta+"0197.jpg", carpeta+"0108.jpg", carpeta+"0153.jpg", carpeta+"0187.jpg"]
-
-    arrayEva = l20
-    for billete in arrayEva:
-        bill = cv.imread(billete)
-        bill = getContornosBillete(bill)
-        cv.imshow("foto a evaluar", bill)
-        cv.waitKey(0)
-        findColor(bill)
-'''
-# cv.imshow("IMG",billete)
-
 #funcion que retorna los descriptores de los puntos clave de la foto
-def getDescriptores(fotos, esPrueba):
+def getDescriptores(fotos, archivoDescriptores):
     brisk = cv.BRISK_create(30)
     descriptores = []
     #guardar descriptores
     for nombreArchivo,foto in fotos:
         puntosClave, descriptoresActuales = brisk.detectAndCompute(foto,None)            
         descriptores.append((nombreArchivo,descriptoresActuales))
-    #convertir a 1 fila
-    descriptoresFila = descriptores[0][1]
-    for nombreArchivo, descriptor in descriptores[1:]:
-        descriptoresFila = np.vstack((descriptoresFila, descriptor))
-    
-    #convertir a float
-    descriptoresFloat = descriptoresFila.astype(float)
-    
-    return (descriptores, descriptoresFloat)
+        
+    joblib.dump(descriptores,archivoDescriptores,compress=3)
 
-#funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
-def kMeans(descriptores, descriptoresFloat, esPrueba, archivoCodeBook, cantidadArchivos):        
-    if esPrueba == 0:
-        k = 64
-        kmean = cluster.KMeans(n_clusters=k)
-        kmean = kmean.fit(descriptoresFloat)
-        joblib.dump((kmean, k),archivoCodeBook,compress=3)
-    else:
-        kmean, k = joblib.load(archivoCodeBook)
-    
-    histogramas = np.zeros((cantidadArchivos,k),"float32")
-    for i in range(cantidadArchivos):
-        predicciones =  kmean.predict(descriptores[i][1])
-        for prediccion in predicciones:
-            histogramas[i][prediccion] += 1
-
-    return histogramas
-
-def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
+''''def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
     descriptores, descriptoresFloat = getDescriptores(fotos,esPrueba)
     histogramas = kMeans(descriptores, descriptoresFloat, esPrueba,archivoCodeBook,cantArchivos)
 
     with open(archivoSalida, "w") as file:
         writer = csv.writer(file)
-        writer.writerows(histogramas)
+        writer.writerows(histogramas)'''
 
 def main(argv):
     fotos, cantFotos = cargarImagenes(argv[0])
-    esPrueba  = int(argv[2])
-    timeInicio = time.time()      
-    extraerCaracteristicas(fotos, argv[1], esPrueba, argv[3],cantFotos)        
-    timeFinal = time.time()
-    timeT = timeFinal - timeInicio
-    print("Le tomo %s segundos" % (timeT)) 
+    getDescriptores(fotos,argv[1])
 
 if __name__ == "__main__":
     main(sys.argv[1:])
