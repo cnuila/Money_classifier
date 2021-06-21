@@ -7,12 +7,10 @@ import joblib
 
 def cargarImagenes(directorio):
     fotos = []
-    cantArchivos = 0
     for archivo in sorted(os.listdir(directorio)):
         img = cv.imread(os.path.join(directorio,archivo))
         fotos.append((archivo, getContornosBillete(img)))
-        cantArchivos+=1
-    return (fotos, cantArchivos)
+    return fotos
 
 def autoCanny(img):
     medianaVector = np.median(img)
@@ -236,7 +234,7 @@ def getDescriptores(fotos, archivoDescriptores):
     for nombreArchivo,foto in fotos:
         puntosClave, descriptoresActuales = brisk.detectAndCompute(foto,None)            
         descriptores.append((nombreArchivo,descriptoresActuales))
-        
+
     joblib.dump(descriptores,archivoDescriptores,compress=3)
 
 ''''def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
@@ -248,7 +246,7 @@ def getDescriptores(fotos, archivoDescriptores):
         writer.writerows(histogramas)'''
 
 def main(argv):
-    fotos, cantFotos = cargarImagenes(argv[0])
+    fotos = cargarImagenes(argv[0])
     getDescriptores(fotos,argv[1])
 
 if __name__ == "__main__":

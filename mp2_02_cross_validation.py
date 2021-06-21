@@ -86,7 +86,7 @@ def imprimirMatrizConfusion(clase, matriz):
         print("")
         cont+=1 
 
-def crossValidation(modelo, x, y, inFolds):
+def crossValidation(modelo, x , y, inFolds, k):
     x_aleatoria, y_aleatoria = utils.shuffle(x, y)
     f1_score_global = 0
     accuracy_global = 0
@@ -97,11 +97,16 @@ def crossValidation(modelo, x, y, inFolds):
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         print("Iteracion :",(i+1))
 
-        validacion_x = x_aleatoria[(i*cantElem):(i*cantElem + cantElem)]
+        validacion_x = x_aleatoria[(i*cantElem):(i*cantElem + cantElem)]            
         validacion_y = y_aleatoria[(i*cantElem):(i*cantElem + cantElem)]
 
         training_x = x_aleatoria[:(i*cantElem)] + x_aleatoria[(i*cantElem + cantElem):]
-        training_y = y_aleatoria[:(i*cantElem)] + y_aleatoria[(i*cantElem + cantElem):]
+        training_y = y_aleatoria[:(i*cantElem)] + y_aleatoria[(i*cantElem + cantElem):]        
+
+        codeBook = kMeans(training_x,k)
+
+        validacion_x = crearHistograma(codeBook,validacion_x,k)
+        training_x = crearHistograma(codeBook,training_x,k)
 
         modelo.fit(training_x,training_y)
         y_pred = modelo.predict(validacion_x)
@@ -167,13 +172,11 @@ def busquedaParametros(descriptores,y_entrenamiento,inFolds):
         iteracion = generarIteracionUnica(iteraciones)   
         iteraciones.append(iteracion)
 
-        x_entrenamiento = kMeans(descriptores,iteracion[4])
-
         randomForest = ensemble.RandomForestClassifier(n_estimators=iteracion[0],max_depth=iteracion[1],criterion=iteracion[2],max_features=iteracion[3])        
         print("---------------------------------------------")
         print("Configuracion ",cont)
         cont+=1
-        score = crossValidation(randomForest,x_entrenamiento, y_entrenamiento,inFolds)
+        score = crossValidation(randomForest,descriptores, y_entrenamiento,inFolds, iteracion[4])
         print(iteracion)
         print("Promedio:",score)
         nuevoPromedio = score    
@@ -188,15 +191,11 @@ def busquedaParametros(descriptores,y_entrenamiento,inFolds):
 #leer las clases de cada foto
 def leerJSON(nombreArchivo):
     clases = []
-    i = 0
     with open(nombreArchivo, 'r') as file:
         jsonData = file.read()
         etiquetas = json.loads(jsonData)
         for etiqueta in etiquetas:
-            if i == 320:
-                break
             clases.append(etiquetas[etiqueta]["denominacion"])
-            i+=1
     return clases
 
 #funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
@@ -211,9 +210,11 @@ def kMeans(descriptores, k):
     descriptoresFloat = descriptoresFila.astype(float)
 
     kmean = cluster.KMeans(n_clusters=k)
-
     kmean = kmean.fit(descriptoresFloat)
-    
+
+    return kmean
+        
+def crearHistograma(kmean, descriptores, k):
     histogramas = np.zeros((len(descriptores),k),"float32")
     for i in range(len(descriptores)):
         predicciones =  kmean.predict(descriptores[i][1])
