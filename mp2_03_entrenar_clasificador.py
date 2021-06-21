@@ -7,15 +7,11 @@ from sklearn import ensemble, metrics,cluster
 #leer las clases de cada foto
 def leerJSON(nombreArchivo):
     clases = []
-    i = 0
     with open(nombreArchivo, 'r') as file:
         jsonData = file.read()
         etiquetas = json.loads(jsonData)
         for etiqueta in etiquetas:
-            if i == 200:
-                break
             clases.append(etiquetas[etiqueta]["denominacion"])
-            i+=1
     return clases
 
 #calcula las estadisticas de cada clase (precision, recall, f1-score)
