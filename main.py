@@ -1,11 +1,26 @@
 import sys
+import os
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plot
 from numpy.core.numeric import empty_like
 from numpy.core.records import array
 from numpy.core.shape_base import hstack, vstack
+import csv
+import time
+from sklearn import cluster
+import joblib
 
+def cargarImagenes(directorio):
+    fotos = []
+    cantArchivos = 0
+    for archivo in sorted(os.listdir(directorio)):
+        if cantArchivos == 5:
+            break
+        img = cv.imread(os.path.join(directorio,archivo))
+        fotos.append((archivo, getContornosBillete(img)))
+        cantArchivos+=1
+    return (fotos, cantArchivos)
 
 def autoCanny(img):
     medianaVector = np.median(img)
@@ -76,10 +91,9 @@ def getContornosBillete(img):
                             if areaMasAdecuada < areaEncontrada:
                                 contornoMasAdecuado = contorno
                                 areaMasAdecuada = areaEncontrada
-
-    # si no encuentra quitará un porcentaje alrededor de la foto
-
-    if areaMasAdecuada == 0:
+        
+    #si no encuentra quitará un porcentaje alrededor de la foto
+    if areaMasAdecuada == 0: 
         if altoImg == 512:
             quitarW = int((7 * largoImg) / 100)
             quitarH = int((20 * altoImg) / 100)
@@ -98,6 +112,9 @@ def getContornosBillete(img):
 
     if largoImg == 512:
         retVal = cv.rotate(retVal, cv.cv2.ROTATE_90_COUNTERCLOCKWISE)
+
+    if largoImg == 512:
+        retVal= cv.rotate(retVal, cv.cv2.ROTATE_90_COUNTERCLOCKWISE)
 
     return retVal
 
@@ -255,6 +272,58 @@ def main(argv):
 
 # cv.imshow("IMG",billete)
 
+#funcion que retorna los descriptores de los puntos clave de la foto
+def getDescriptores(fotos, esPrueba):
+    brisk = cv.BRISK_create(30)
+    descriptores = []
+    #guardar descriptores
+    for nombreArchivo,foto in fotos:
+        puntosClave, descriptoresActuales = brisk.detectAndCompute(foto,None)            
+        descriptores.append((nombreArchivo,descriptoresActuales))
+    #convertir a 1 fila
+    descriptoresFila = descriptores[0][1]
+    for nombreArchivo, descriptor in descriptores[1:]:
+        descriptoresFila = np.vstack((descriptoresFila, descriptor))
+    
+    #convertir a float
+    descriptoresFloat = descriptoresFila.astype(float)
+    
+    return (descriptores, descriptoresFloat)
+
+#funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
+def kMeans(descriptores, descriptoresFloat, esPrueba, archivoCodeBook, cantidadArchivos):        
+    if esPrueba == 0:
+        k = 64
+        kmean = cluster.KMeans(n_clusters=k)
+        kmean = kmean.fit(descriptoresFloat)
+        joblib.dump((kmean, k),archivoCodeBook,compress=3)
+    else:
+        kmean, k = joblib.load(archivoCodeBook)
+    
+    histogramas = np.zeros((cantidadArchivos,k),"float32")
+    for i in range(cantidadArchivos):
+        predicciones =  kmean.predict(descriptores[i][1])
+        for prediccion in predicciones:
+            histogramas[i][prediccion] += 1
+
+    return histogramas
+
+def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
+    descriptores, descriptoresFloat = getDescriptores(fotos,esPrueba)
+    histogramas = kMeans(descriptores, descriptoresFloat, esPrueba,archivoCodeBook,cantArchivos)
+
+    with open(archivoSalida, "w") as file:
+        writer = csv.writer(file)
+        writer.writerows(histogramas)
+
+def main(argv):
+    fotos, cantFotos = cargarImagenes(argv[0])
+    esPrueba  = int(argv[2])
+    timeInicio = time.time()      
+    extraerCaracteristicas(fotos, argv[1], esPrueba, argv[3],cantFotos)        
+    timeFinal = time.time()
+    timeT = timeFinal - timeInicio
+    print("Le tomo %s segundos" % (timeT)) 
 
 if __name__ == "__main__":
     main(sys.argv[1:])
