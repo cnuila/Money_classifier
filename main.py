@@ -4,19 +4,19 @@ import cv2 as cv
 import numpy as np
 import csv
 import time
-from sklearn import cluster,utils
+from sklearn import cluster
 import joblib
 
 def cargarImagenes(directorio):
     fotos = []
-    i = 0
+    cantArchivos = 0
     for archivo in sorted(os.listdir(directorio)):
-        if i == 5:
+        if cantArchivos == 5:
             break
         img = cv.imread(os.path.join(directorio,archivo))
         fotos.append((archivo, getContornosBillete(img)))
-        i+=1
-    return fotos
+        cantArchivos+=1
+    return (fotos, cantArchivos)
 
 def autoCanny(img):
     medianaVector = np.median(img)
@@ -106,17 +106,13 @@ def getContornosBillete(img):
     return retVal
 
 #funcion que retorna los descriptores de los puntos clave de la foto
-def getDescriptores(fotos):
+def getDescriptores(fotos, esPrueba):
     brisk = cv.BRISK_create(30)
     descriptores = []
-    sum = 0
+    #guardar descriptores
     for nombreArchivo,foto in fotos:
-        puntosClave, descriptor = brisk.detectAndCompute(foto,None)        
-        
-        extraer = int(len(descriptor) * 0.40)
-        nuevoDescr = utils.shuffle(descriptor)
-
-        descriptores.append((nombreArchivo,nuevoDescr[:extraer]))
+        puntosClave, descriptoresActuales = brisk.detectAndCompute(foto,None)            
+        descriptores.append((nombreArchivo,descriptoresActuales))
     #convertir a 1 fila
     descriptoresFila = descriptores[0][1]
     for nombreArchivo, descriptor in descriptores[1:]:
@@ -124,39 +120,43 @@ def getDescriptores(fotos):
     
     #convertir a float
     descriptoresFloat = descriptoresFila.astype(float)
+    
     return (descriptores, descriptoresFloat)
 
 #funcion que guarda en fit los visual words y luego predice cada uno de los descriptores
-def kMeans(descriptores, descriptoresFloat):    
-    k = 200
-    kmean = cluster.KMeans(n_clusters=k)
-    kmean = kmean.fit(descriptoresFloat)
-    joblib.dump((kmean, k),"bovw.pkl",compress=3)
-    '''histogramas = np.zeros((40,k),"float32")
-    for i in range(40):
-        
-        predicciones =  fit.predict(descriptores[i][1])
+def kMeans(descriptores, descriptoresFloat, esPrueba, archivoCodeBook, cantidadArchivos):        
+    if esPrueba == 0:
+        k = 64
+        kmean = cluster.KMeans(n_clusters=k)
+        kmean = kmean.fit(descriptoresFloat)
+        joblib.dump((kmean, k),archivoCodeBook,compress=3)
+    else:
+        kmean, k = joblib.load(archivoCodeBook)
+    
+    histogramas = np.zeros((cantidadArchivos,k),"float32")
+    for i in range(cantidadArchivos):
+        predicciones =  kmean.predict(descriptores[i][1])
         for prediccion in predicciones:
             histogramas[i][prediccion] += 1
 
-    return histogramas'''
+    return histogramas
 
-def extraerCaracteristicas(fotos, archivoSalida):    
-    descriptores, descriptoresFloat = getDescriptores(fotos)
-    kMeans(descriptores, descriptoresFloat)
+def extraerCaracteristicas(fotos, archivoSalida, esPrueba, archivoCodeBook, cantArchivos):    
+    descriptores, descriptoresFloat = getDescriptores(fotos,esPrueba)
+    histogramas = kMeans(descriptores, descriptoresFloat, esPrueba,archivoCodeBook,cantArchivos)
 
-    '''with open(archivoSalida, "w") as file:
+    with open(archivoSalida, "w") as file:
         writer = csv.writer(file)
-        writer.writerows(histogramas)'''
+        writer.writerows(histogramas)
 
 def main(argv):
-    fotos = cargarImagenes(argv[0])
+    fotos, cantFotos = cargarImagenes(argv[0])
+    esPrueba  = int(argv[2])
     timeInicio = time.time()      
-    extraerCaracteristicas(fotos, argv[1])      
+    extraerCaracteristicas(fotos, argv[1], esPrueba, argv[3],cantFotos)        
     timeFinal = time.time()
     timeT = timeFinal - timeInicio
-    print("Le tomo %s segundos" % (timeT))
-    
+    print("Le tomo %s segundos" % (timeT)) 
 
 if __name__ == "__main__":
     main(sys.argv[1:])
