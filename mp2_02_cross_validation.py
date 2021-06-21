@@ -92,6 +92,7 @@ def crossValidation(modelo, x , y, inFolds, k):
     accuracy_global = 0
     cantElem = int(len(x) / inFolds)
 
+
     for i in range(0,inFolds):
         print()
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -128,7 +129,7 @@ def crossValidation(modelo, x , y, inFolds, k):
            
 #funcion que genera una iteracion de los paramtros unica
 def generarIteracionUnica(iteraciones):
-    listaMaxDepth = [3, 4, 5, 6, 7, 8, 9, 10, 11, None]
+    listaMaxDepth = [6, 10, 15, 20, 25, 26, 27, 28, 29, 30]
     criterios = ["gini", "entropy"]
 
     maxDepth = listaMaxDepth[randint(0, 9)]
@@ -164,7 +165,7 @@ def esIteracionUnica(iteraciones, nuevaIteracion):
 def busquedaParametros(descriptores,y_entrenamiento,inFolds):
     iteraciones = []   
 
-    mayorPromedio = 0.605
+    mayorPromedio =  0.5219819130145218
     nuevoPromedio = 0
     cont = 1
 
@@ -203,13 +204,13 @@ def kMeans(descriptores, k):
 
     #convertir a 1 fila
     descriptoresFila = descriptores[0][1]
+    
     for nombreArchivo, descriptor in descriptores[1:]:
         descriptoresFila = np.vstack((descriptoresFila, descriptor))
-
     #convertir a float
     descriptoresFloat = descriptoresFila.astype(float)
 
-    kmean = cluster.KMeans(n_clusters=k)
+    kmean = cluster.MiniBatchKMeans(n_clusters=k)
     kmean = kmean.fit(descriptoresFloat)
 
     return kmean

@@ -7,6 +7,7 @@ import joblib
 
 def cargarImagenes(directorio):
     fotos = []
+    i = 0
     for archivo in sorted(os.listdir(directorio)):
         img = cv.imread(os.path.join(directorio,archivo))
         fotos.append((archivo, getContornosBillete(img)))
